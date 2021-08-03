@@ -1,15 +1,13 @@
 # framework-golang
 
-Questo è il framework che verrà utilizzato dalle lambda per l'esecuzione del codice relativo agli eventi.
+This is the base framework for every lambda function that react to events.
 
-Conterrà tutto il codice utile alla corretta esecuzione della lambda ma non le logiche di business.
+It MUST NOT contain business logic.
 
-In questo framework verranno configurate tutte le dipendenze che possono essere usate dai progetti:
+The framework will provide all of the tools needed to build lambdas in the correct way, ex:
 
 * logger
-* connessioni al database
+* database connection
 * xray
 
-Le logiche di business risiederanno nella funzione principale dei progetti.
-
-Per capirne il funzionamento guarda lo scheletro: [https://github.com/macai-project/scheletro-golang](https://github.com/macai-project/scheletro-golang)
+To see how to use this repository look at the skeleton-golang repository.
