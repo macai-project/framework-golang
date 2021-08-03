@@ -5,10 +5,11 @@ import (
 	"encoding/json"
 	"testing"
 
+	"github.com/macai-project/events"
 	"github.com/stretchr/testify/assert"
 )
 
-func businessLogic(ctx context.Context, e testEvent) (string, error) {
+func businessLogic(ctx context.Context, e events.TestEvent) (string, error) {
 	return "ok", nil
 }
 
@@ -46,7 +47,7 @@ func TestHandleRequest(t *testing.T) {
 		}
 	}`
 
-	var inputEvent testEvent
+	var inputEvent events.TestEvent
 	if err := json.Unmarshal([]byte(inputJson), &inputEvent); err != nil {
 		t.Errorf("could not unmarshal event. details: %v", err)
 	}

@@ -32,7 +32,7 @@ services:
     image: golang:latest
     tty: true
     volumes:
-      - .:/data
+      - ~/go:/go
       - ~/.aws:/root/.aws
       - ~/.gitconfig:/root/.gitconfig
-    working_dir: /data
+    working_dir: /go/src/github.com/macai-project/framework-golang
