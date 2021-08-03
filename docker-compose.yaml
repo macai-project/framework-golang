@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  aurora:
+    container_name: aurora
+    environment:
+      - MYSQL_USER=healthcheck
+      - MYSQL_PASSWORD=healthcheck
+      - MYSQL_ROOT_PASSWORD=aurora
+    healthcheck:
+      test:
+        ["CMD-SHELL", "MYSQL_PWD=healthcheck mysqladmin ping -u healthcheck"]
+      timeout: 20s
+      retries: 10
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+
+  lambda:
+    command: "scripts/testwatch.sh"
+    container_name: lambda
+    depends_on:
+      aurora:
+        condition: service_healthy
+    environment:
+      - AURORA_HOSTNAME=mysql
+      - AURORA_USERNAME=root
+      - AURORA_PASSWORD=aurora
+      - AURORA_DATABASE=lambda
+      - LOG_LEVEL=debug
+      - LOG_COLORS=true
+    image: golang:latest
+    tty: true
+    volumes:
+      - .:/data
+      - ~/.aws:/root/.aws
+      - ~/.gitconfig:/root/.gitconfig
+    working_dir: /data
