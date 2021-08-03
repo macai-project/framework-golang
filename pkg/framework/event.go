@@ -2,7 +2,7 @@ package framework
 
 import "time"
 
-type SupermercacchioEvent struct {
+type testEvent struct {
 	Version    string                 `json:"version"`     // The version of event data
 	ID         string                 `json:"id"`          // The unique ID of the event
 	DetailType string                 `json:"detail-type"` //Details about event type

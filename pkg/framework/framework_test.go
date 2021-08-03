@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func businessLogic(ctx context.Context, e SupermercacchioEvent) (string, error) {
+func businessLogic(ctx context.Context, e testEvent) (string, error) {
 	return "ok", nil
 }
 
@@ -46,7 +46,7 @@ func TestHandleRequest(t *testing.T) {
 		}
 	}`
 
-	var inputEvent SupermercacchioEvent
+	var inputEvent testEvent
 	if err := json.Unmarshal([]byte(inputJson), &inputEvent); err != nil {
 		t.Errorf("could not unmarshal event. details: %v", err)
 	}

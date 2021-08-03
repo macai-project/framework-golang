@@ -2,7 +2,6 @@ version: "3"
 
 services:
   aurora:
-    container_name: aurora
     environment:
       - MYSQL_USER=healthcheck
       - MYSQL_PASSWORD=healthcheck
@@ -20,7 +19,6 @@ services:
 
   lambda:
     command: "scripts/testwatch.sh"
-    container_name: lambda
     depends_on:
       aurora:
         condition: service_healthy
