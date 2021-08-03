@@ -5,7 +5,7 @@ go 1.16
 replace github.com/macai-project/events => ../events
 
 require (
-	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/aws/aws-lambda-go v1.26.0
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/macai-project/events v0.0.0-20210803190325-7e3ba2a99727
 	github.com/stretchr/testify v1.7.0
