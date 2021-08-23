@@ -15,7 +15,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:z
 
   lambda:
     command: "scripts/testwatch.sh"
@@ -32,7 +32,7 @@ services:
     image: golang:latest
     tty: true
     volumes:
-      - ~/go:/go
-      - ~/.aws:/root/.aws
-      - ~/.gitconfig:/root/.gitconfig
+      - ~/go:/go:z
+      - ~/.aws:/root/.aws:z
+      - ~/.gitconfig:/root/.gitconfig:z
     working_dir: /go/src/github.com/macai-project/framework-golang
