@@ -6,10 +6,11 @@ import (
 	"testing"
 
 	"github.com/macai-project/events"
+	"github.com/macai-project/framework-golang/internal/container"
 	"github.com/stretchr/testify/assert"
 )
 
-func businessLogic(ctx context.Context, e events.TestEvent) (string, error) {
+func businessLogic(ctx context.Context, c *container.Container, e events.TestEvent) (string, error) {
 	return "ok", nil
 }
 
@@ -52,8 +53,10 @@ func TestHandleRequest(t *testing.T) {
 		t.Errorf("could not unmarshal event. details: %v", err)
 	}
 
+	c := container.Container{}
+	c.NewLogger()
 	ctx := context.Background()
-	string, err := HandleRequest(ctx, inputEvent)
+	string, err := HandleRequest(ctx, &c, inputEvent)
 	assert.Nil(t, err)
 	assert.Equal(t, string, "ok")
 }
