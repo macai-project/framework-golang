@@ -5,11 +5,11 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/macai-project/events"
+	"github.com/aws/aws-lambda-go/events"
 	"github.com/stretchr/testify/assert"
 )
 
-func businessLogic(ctx context.Context, e events.TestEvent) (string, error) {
+func businessLogic(ctx context.Context, e events.CloudWatchEvent) (string, error) {
 	return "ok", nil
 }
 
@@ -25,7 +25,6 @@ func TestHandleRequest(t *testing.T) {
 		"account": "123456789012",
 		"time": "1970-01-01T00:00:00Z",
 		"region": "us-west-2",
-		"resources": [
 			"auto-scaling-group-arn",
 			"instance-arn"
 		],
@@ -47,7 +46,7 @@ func TestHandleRequest(t *testing.T) {
 		}
 	}`
 
-	var inputEvent events.TestEvent
+	var inputEvent events.CloudWatchEvent
 	if err := json.Unmarshal([]byte(inputJson), &inputEvent); err != nil {
 		t.Errorf("could not unmarshal event. details: %v", err)
 	}

@@ -2,17 +2,16 @@ package framework
 
 import (
 	"context"
-
-	"github.com/macai-project/events"
+	"github.com/aws/aws-lambda-go/events"
 )
 
-var businessLogicHandler func(ctx context.Context, e events.TestEvent) (string, error)
+var businessLogicHandler func(ctx context.Context, e events.CloudWatchEvent) (string, error)
 
-func RegisterBusinessLogic(funzione func(ctx context.Context, e events.TestEvent) (string, error)) {
+func RegisterBusinessLogic(funzione func(ctx context.Context, e events.CloudWatchEvent) (string, error)) {
 	businessLogicHandler = funzione
 }
 
 // HandleRequest avvia il framework
-func HandleRequest(ctx context.Context, e events.TestEvent) (string, error) {
+func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error) {
 	return businessLogicHandler(ctx, e)
 }
