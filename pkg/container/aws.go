@@ -1,0 +1,16 @@
+package container
+
+import (
+	"context"
+	"github.com/aws/aws-sdk-go-v2/config"
+)
+
+// NewAWSConfig create a new AWS config object
+func (c *Container) NewAWSConfig() error {
+	var err error
+	c.AwsConfig, err = config.LoadDefaultConfig(context.TODO())
+	if err != nil {
+		return err
+	}
+	return nil
+}
