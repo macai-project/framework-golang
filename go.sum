@@ -18,8 +18,9 @@ github.com/aws/aws-lambda-go v1.26.0/go.mod h1:jJmlefzPfGnckuHdXX7/80O3BvUUi12XO
 github.com/aws/aws-sdk-go v1.17.12 h1:jMFwRUaM0LcfdenfvbDLePNoWSoCdOHqF4RCvSB4xNQ=
 github.com/aws/aws-sdk-go v1.17.12/go.mod h1:KmX6BPdI08NWTb3/sm4ZGu5ShLoqVDhKgpiN924inxo=
 github.com/aws/aws-sdk-go-v2 v1.6.0/go.mod h1:tI4KhsR5VkzlUa2DZAdwx7wCAYGwkZZ1H31PYrBFx1w=
-github.com/aws/aws-sdk-go-v2 v1.9.0 h1:+S+dSqQCN3MSU5vJRu1HqHrq00cJn6heIMU7X9hcsoo=
 github.com/aws/aws-sdk-go-v2 v1.9.0/go.mod h1:cK/D0BBs0b/oWPIcX/Z/obahJK1TT7IPVjy53i/mX/4=
+github.com/aws/aws-sdk-go-v2 v1.9.1 h1:ZbovGV/qo40nrOJ4q8G33AGICzaPI45FHQWJ9650pF4=
+github.com/aws/aws-sdk-go-v2 v1.9.1/go.mod h1:cK/D0BBs0b/oWPIcX/Z/obahJK1TT7IPVjy53i/mX/4=
 github.com/aws/aws-sdk-go-v2/config v1.8.1 h1:AcAenV2NVwOViG+3ts73uT08L1olN4NBNNz7lUlHSUo=
 github.com/aws/aws-sdk-go-v2/config v1.8.1/go.mod h1:AQtpYfVYjuuft4Dgh0jGSkPQJ9MvmK9vXfSub7oSXlI=
 github.com/aws/aws-sdk-go-v2/credentials v1.4.1 h1:oDiUP50hKRwC6xAgESAj46lgL2prJRZQWnCBzn+TU/c=
@@ -28,6 +29,8 @@ github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.5.0 h1:OxTAgH8Y4BXHD6PGCJ8DHx2k
 github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.5.0/go.mod h1:CpNzHK9VEFUCknu50kkB8z58AH2B5DvPP7ea1LHve/Y=
 github.com/aws/aws-sdk-go-v2/internal/ini v1.2.2 h1:d95cddM3yTm4qffj3P6EnP+TzX1SSkWaQypXSgT/hpA=
 github.com/aws/aws-sdk-go-v2/internal/ini v1.2.2/go.mod h1:BQV0agm+JEhqR+2RT5e1XTFIDcAAV0eW6z2trp+iduw=
+github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.8.1 h1:w/fPGB0t5rWwA43mux4e9ozFSH5zF1moQemlA131PWc=
+github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.8.1/go.mod h1:CM+19rL1+4dFWnOQKwDc7H1KwXTz+h61oUSHyhV0b3o=
 github.com/aws/aws-sdk-go-v2/service/eventbridge v1.7.0 h1:+ZDBbC/UcJzvJStBLFjcu8fuYceeNI4dLkbYnj4RkB0=
 github.com/aws/aws-sdk-go-v2/service/eventbridge v1.7.0/go.mod h1:2y0BgTRpkiYfxjJCqFC2d43tn32n761zJd5XqxkUPi8=
 github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.3.0 h1:VNJ5NLBteVXEwE2F1zEXVmyIH58mZ6kIQGJoC7C+vkg=
