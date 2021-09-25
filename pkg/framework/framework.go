@@ -35,6 +35,5 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 	// Set the timeout to the maximum duration the program can afford to wait.
 	defer sentry.Flush(1 * time.Second)
 
-	result, err := businessLogicHandler(ctx, c, e)
-	return result, err
+	return businessLogicHandler(ctx, c, e)
 }
