@@ -19,7 +19,16 @@ func RegisterBusinessLogic(funzione func(ctx context.Context, c *container.Conta
 
 // HandleRequest avvia il framework
 func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error) {
+	var err error
+
 	c = &container.Container{}
+
+	// AWS Config
+	err = c.NewAWSConfig()
+	if err != nil {
+		c.Logger.Fatalf("Error initializing AWS Config: %s", err)
+		return "AWS Error", err
+	}
 
 	// Logger
 	c.NewLogger()
@@ -27,7 +36,7 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 
 	// Sentry
 	sentryDSN, _ := os.LookupEnv("SENTRY_DSN")
-	err := sentry.Init(sentry.ClientOptions{
+	err = sentry.Init(sentry.ClientOptions{
 		Dsn:              sentryDSN,
 		TracesSampleRate: 0.2,
 	})
