@@ -3,13 +3,15 @@ package framework
 import (
 	"context"
 	"encoding/json"
+	"github.com/macai-project/framework-golang/pkg/container"
 	"testing"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/stretchr/testify/assert"
 )
 
-func businessLogic(ctx context.Context, e events.CloudWatchEvent) (string, error) {
+func businessLogic(ctx context.Context, c *container.Container, e events.CloudWatchEvent) (string, error) {
+	c.NewSqlClient(ctx)
 	return "ok", nil
 }
 
@@ -25,9 +27,6 @@ func TestHandleRequest(t *testing.T) {
 		"account": "123456789012",
 		"time": "1970-01-01T00:00:00Z",
 		"region": "us-west-2",
-			"auto-scaling-group-arn",
-			"instance-arn"
-		],
 		"detail": {
 			"StatusCode": "InProgress",
 			"Description": "Launching a new EC2 instance: i-12345678",

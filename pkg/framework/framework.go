@@ -21,6 +21,10 @@ func RegisterBusinessLogic(funzione func(ctx context.Context, c *container.Conta
 func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error) {
 	c = &container.Container{}
 
+	// Logger
+	c.NewLogger()
+	defer c.Logger.Sync()
+
 	// Sentry
 	sentryDSN, _ := os.LookupEnv("SENTRY_DSN")
 	err := sentry.Init(sentry.ClientOptions{

@@ -12,5 +12,6 @@ func (c *Container) NewAWSConfig() error {
 	if err != nil {
 		return err
 	}
+	c.Logger.Debug("AWS Config loaded")
 	return nil
 }
