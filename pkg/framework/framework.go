@@ -2,6 +2,7 @@ package framework
 
 import (
 	"context"
+	"github.com/aws/aws-lambda-go/events"
 	"github.com/getsentry/sentry-go"
 	"github.com/macai-project/framework-golang/pkg/container"
 	"os"
@@ -10,14 +11,14 @@ import (
 
 var c *container.Container
 
-var businessLogicHandler func(ctx context.Context, c *container.Container, e interface{}) (string, error)
+var businessLogicHandler func(ctx context.Context, c *container.Container, e events.CloudWatchEvent) (string, error)
 
-func RegisterBusinessLogic(funzione func(ctx context.Context, c *container.Container, e interface{}) (string, error)) {
-	businessLogicHandler = funzione
+func RegisterBusinessLogic(f func(ctx context.Context, c *container.Container, e events.CloudWatchEvent) (string, error)) {
+	businessLogicHandler = f
 }
 
-// HandleRequest avvia il framework
-func HandleRequest(ctx context.Context, e interface{}) (string, error) {
+// HandleRequest start the framework
+func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error) {
 	var err error
 
 	c = &container.Container{}

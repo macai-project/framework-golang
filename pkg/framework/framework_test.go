@@ -10,8 +10,8 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-func businessLogic(ctx context.Context, c *container.Container, e interface{}) (string, error) {
-	//c.NewSqlClient(ctx)
+func businessLogic(ctx context.Context, c *container.Container, e events.CloudWatchEvent) (string, error) {
+	c.NewSqlClient(ctx)
 	return "ok", nil
 }
 
@@ -22,26 +22,19 @@ func TestHandleRequest(t *testing.T) {
 	inputJson := `{
 		"version": "0",
 		"id": "12345678-1234-1234-1234-123456789012",
-		"detail-type": "EC2 Instance Launch Successful",
-		"source": "aws.autoscaling",
+		"detail-type": "itemPlaced",
+		"source": "com.macaiapp.warehouse.staging",
 		"account": "123456789012",
 		"time": "1970-01-01T00:00:00Z",
-		"region": "us-west-2",
+		"region": "eu-west-1",
 		"detail": {
-			"StatusCode": "InProgress",
-			"Description": "Launching a new EC2 instance: i-12345678",
-			"AutoScalingGroupName": "my-auto-scaling-group",
-			"ActivityId": "87654321-4321-4321-4321-210987654321",
-			"Details": {
-				"Availability Zone": "us-west-2b",
-				"Subnet ID": "subnet-12345678"
-			},
-			"RequestId": "12345678-1234-1234-1234-123456789012",
-			"StatusMessage": "",
-			"EndTime": "1970-01-01T00:00:00Z",
-			"EC2InstanceId": "i-1234567890abcdef0",
-			"StartTime": "1970-01-01T00:00:00Z",
-			"Cause": "description-text"
+			"Ean":"12345",
+			"Name":"Ciao",
+			"Quantity":12,
+			"ShelfId":"12",
+			"ShelfName":"scaffale12",
+			"CityId":"allos",
+			"WarehouseId":"asd23"
 		}
 	}`
 
