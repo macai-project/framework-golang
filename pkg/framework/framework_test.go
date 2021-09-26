@@ -4,14 +4,14 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/macai-project/framework-golang/pkg/container"
+	"github.com/stretchr/testify/assert"
 	"testing"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/stretchr/testify/assert"
 )
 
-func businessLogic(ctx context.Context, c *container.Container, e events.CloudWatchEvent) (string, error) {
-	c.NewSqlClient(ctx)
+func businessLogic(ctx context.Context, c *container.Container, e interface{}) (string, error) {
+	//c.NewSqlClient(ctx)
 	return "ok", nil
 }
 
@@ -52,7 +52,8 @@ func TestHandleRequest(t *testing.T) {
 
 	ctx := context.Background()
 
-	string, err := HandleRequest(ctx, inputEvent)
+	s, err := HandleRequest(ctx, inputEvent)
+
 	assert.Nil(t, err)
-	assert.Equal(t, string, "ok")
+	assert.Equal(t, s, "ok")
 }
