@@ -1,7 +1,9 @@
 package container
 
 import (
+	"database/sql"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	"go.uber.org/zap"
@@ -9,8 +11,10 @@ import (
 
 // Container is the container used to inject dependencies into the flow
 type Container struct {
-	Logger               *zap.SugaredLogger
+	awsConfig            aws.Config
+	DB                   *sql.DB
+	CloudwatchClient     *cloudwatch.Client
 	EventBridgeClient    *eventbridge.Client
+	Logger               *zap.SugaredLogger
 	SecretsManagerClient *secretsmanager.Client
-	AwsConfig            aws.Config
 }

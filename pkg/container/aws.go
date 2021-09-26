@@ -8,9 +8,10 @@ import (
 // NewAWSConfig create a new AWS config object
 func (c *Container) NewAWSConfig() error {
 	var err error
-	c.AwsConfig, err = config.LoadDefaultConfig(context.TODO())
+	c.awsConfig, err = config.LoadDefaultConfig(context.TODO())
 	if err != nil {
 		return err
 	}
+	c.Logger.Debug("AWS Config loaded")
 	return nil
 }

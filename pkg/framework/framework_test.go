@@ -3,13 +3,15 @@ package framework
 import (
 	"context"
 	"encoding/json"
+	"github.com/macai-project/framework-golang/pkg/container"
+	"github.com/stretchr/testify/assert"
 	"testing"
 
-	"github.com/macai-project/events"
-	"github.com/stretchr/testify/assert"
+	"github.com/aws/aws-lambda-go/events"
 )
 
-func businessLogic(ctx context.Context, e events.TestEvent) (string, error) {
+func businessLogic(ctx context.Context, c *container.Container, e interface{}) (string, error) {
+	//c.NewSqlClient(ctx)
 	return "ok", nil
 }
 
@@ -25,10 +27,6 @@ func TestHandleRequest(t *testing.T) {
 		"account": "123456789012",
 		"time": "1970-01-01T00:00:00Z",
 		"region": "us-west-2",
-		"resources": [
-			"auto-scaling-group-arn",
-			"instance-arn"
-		],
 		"detail": {
 			"StatusCode": "InProgress",
 			"Description": "Launching a new EC2 instance: i-12345678",
@@ -47,14 +45,15 @@ func TestHandleRequest(t *testing.T) {
 		}
 	}`
 
-	var inputEvent events.TestEvent
+	var inputEvent events.CloudWatchEvent
 	if err := json.Unmarshal([]byte(inputJson), &inputEvent); err != nil {
 		t.Errorf("could not unmarshal event. details: %v", err)
 	}
 
 	ctx := context.Background()
 
-	string, err := HandleRequest(ctx, inputEvent)
+	s, err := HandleRequest(ctx, inputEvent)
+
 	assert.Nil(t, err)
-	assert.Equal(t, string, "ok")
+	assert.Equal(t, s, "ok")
 }

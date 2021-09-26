@@ -6,5 +6,5 @@ import (
 
 // NewEventbridgeClient create a new Eventbridge client
 func (c *Container) NewEventbridgeClient() {
-	c.EventBridgeClient = eventbridge.NewFromConfig(c.AwsConfig)
+	c.EventBridgeClient = eventbridge.NewFromConfig(c.awsConfig)
 }

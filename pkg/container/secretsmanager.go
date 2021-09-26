@@ -6,5 +6,5 @@ import (
 
 // NewSecretsManagerClient create a new SecretsManager client
 func (c *Container) NewSecretsManagerClient() {
-	c.SecretsManagerClient = secretsmanager.NewFromConfig(c.AwsConfig)
+	c.SecretsManagerClient = secretsmanager.NewFromConfig(c.awsConfig)
 }

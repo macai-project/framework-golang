@@ -8,27 +8,27 @@ services:
       - MYSQL_ROOT_PASSWORD=aurora
     healthcheck:
       test:
-        ["CMD-SHELL", "MYSQL_PWD=healthcheck mysqladmin ping -u healthcheck"]
+        [ "CMD-SHELL", "MYSQL_PWD=healthcheck mysqladmin ping -u healthcheck" ]
       timeout: 20s
       retries: 10
     image: mysql:5.7
     ports:
-      - 3306:3306
+      - "3306:3306"
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:z
 
   lambda:
     command: "scripts/testwatch.sh"
     depends_on:
-      aurora:
-        condition: service_healthy
+      - aurora
     environment:
-      - AURORA_HOSTNAME=mysql
+      - AURORA_HOSTNAME=aurora
       - AURORA_USERNAME=root
       - AURORA_PASSWORD=aurora
       - AURORA_DATABASE=lambda
       - LOG_LEVEL=debug
       - LOG_COLORS=true
+      - AWS_XRAY_CONTEXT_MISSING=LOG_ERROR
     image: golang:latest
     tty: true
     volumes:
