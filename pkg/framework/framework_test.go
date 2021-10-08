@@ -10,6 +10,8 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
+var co *container.Container
+
 func businessLogic(ctx context.Context, c *container.Container, e events.CloudWatchEvent) (string, error) {
 	c.NewSqlClient(ctx)
 	return "ok", nil
@@ -17,6 +19,7 @@ func businessLogic(ctx context.Context, c *container.Container, e events.CloudWa
 
 func TestHandleRequest(t *testing.T) {
 
+	RegisterContainer(co)
 	RegisterBusinessLogic(businessLogic)
 
 	inputJson := `{

@@ -13,6 +13,10 @@ var c *container.Container
 
 var businessLogicHandler func(ctx context.Context, c *container.Container, e events.CloudWatchEvent) (string, error)
 
+func RegisterContainer(fc *container.Container) {
+	c = fc
+}
+
 func RegisterBusinessLogic(f func(ctx context.Context, c *container.Container, e events.CloudWatchEvent) (string, error)) {
 	businessLogicHandler = f
 }
