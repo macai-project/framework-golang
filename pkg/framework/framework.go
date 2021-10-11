@@ -27,17 +27,6 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 
 	c = &container.Container{}
 
-	// Logger
-	c.NewLogger()
-	defer c.Logger.Sync()
-
-	// AWS Config
-	err = c.NewAWSConfig()
-	if err != nil {
-		c.Logger.Fatalf("Error initializing AWS Config: %s", err)
-		return "AWS Error", err
-	}
-
 	// Sentry
 	sentryDSN, _ := os.LookupEnv("SENTRY_DSN")
 	err = sentry.Init(sentry.ClientOptions{
@@ -51,6 +40,17 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 	// Flush buffered events before the program terminates.
 	// Set the timeout to the maximum duration the program can afford to wait.
 	defer sentry.Flush(1 * time.Second)
+	
+	// Logger
+	c.NewLogger()
+	defer c.Logger.Sync()
+
+	// AWS Config
+	err = c.NewAWSConfig()
+	if err != nil {
+		c.Logger.Fatalf("Error initializing AWS Config: %s", err)
+		return "AWS Error", err
+	}
 
 	return businessLogicHandler(ctx, c, e)
 }
