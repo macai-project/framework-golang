@@ -38,10 +38,16 @@ github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.8.1 h1:w/fPGB0t5rWwA43mux4e9o
 github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.8.1/go.mod h1:CM+19rL1+4dFWnOQKwDc7H1KwXTz+h61oUSHyhV0b3o=
 github.com/aws/aws-sdk-go-v2/service/eventbridge v1.7.1 h1:KT+KEpNUXgALkOy3dakK+X0W45MqKDH1BGadkAmaQjI=
 github.com/aws/aws-sdk-go-v2/service/eventbridge v1.7.1/go.mod h1:Am/B7LxM+dsq5Cag+PblF6R6C4H7qHD0y5bXrb6qAYU=
+github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.3.0 h1:gceOysEWNNwLd6cki65IMBZ4WAM0MwgBQq2n7kejoT8=
+github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.3.0/go.mod h1:v8ygadNyATSm6elwJ/4gzJwcFhri9RqS8skgHKiwXPU=
 github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.3.1 h1:APEjhKZLFlNVLATnA/TJyA+w1r/xd5r5ACWBDZ9aIvc=
 github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.3.1/go.mod h1:Ve+eJOx9UWaT/lMVebnFhDhO49fSLVedHoA82+Rqme0=
+github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.7.1 h1:YEz2KMyqK2zyG3uOa0l2xBc/H6NUVJir8FhwHQHF3rc=
+github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.7.1/go.mod h1:yg4EN/BKoc7+DLhNOxxdvoO3+iyW2FuynvaKqLcLDUM=
 github.com/aws/aws-sdk-go-v2/service/route53 v1.6.2 h1:OsggywXCk9iFKdu2Aopg3e1oJITIuyW36hA/B0rqupE=
 github.com/aws/aws-sdk-go-v2/service/route53 v1.6.2/go.mod h1:ZnAMilx42P7DgIrdjlWCkNIGSBLzeyk6T31uB8oGTwY=
+github.com/aws/aws-sdk-go-v2/service/s3 v1.16.0 h1:dt1JQFj/135ozwGIWeCM3aQ8N/kB3Xu3Uu4r9zuOIyc=
+github.com/aws/aws-sdk-go-v2/service/s3 v1.16.0/go.mod h1:Tk23mCmfL3wb3tNIeMk/0diUZ0W4R6uZtjYKguMLW2s=
 github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.6.1 h1:vjOsFgkexFPvOTaVdbnoZR56b3XRZkNc22mYxp5+c7I=
 github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.6.1/go.mod h1:GztflSgYVtItQWZE8onI4SRKWnj5TA54D5Uz+wUk6IQ=
 github.com/aws/aws-sdk-go-v2/service/sso v1.4.1 h1:RfgQyv3bFT2Js6XokcrNtTjQ6wAVBRpoCgTFsypihHA=
