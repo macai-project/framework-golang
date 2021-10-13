@@ -16,7 +16,7 @@ func (c *Container) NewSqlClient(ctx context.Context) error {
 	awsv2.AWSV2Instrumentor(&c.awsConfig.APIOptions)
 
 	// Open SQL Connection
-	c.DB, err = xray.SQLContext("mysql", fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", os.Getenv("AURORA_USERNAME"), os.Getenv("AURORA_PASSWORD"), os.Getenv("AURORA_DATABASE"), os.Getenv("AURORA_DATABASE")))
+	c.DB, err = xray.SQLContext("mysql", fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", os.Getenv("AURORA_USERNAME"), os.Getenv("AURORA_PASSWORD"), os.Getenv("AURORA_HOSTNAME"), os.Getenv("AURORA_DATABASE")))
 	if err != nil {
 		c.Logger.Fatal("Error in SQL Connection", err)
 		return err
