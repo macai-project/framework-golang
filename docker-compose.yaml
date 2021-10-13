@@ -5,20 +5,25 @@ services:
     environment:
       - MYSQL_USER=healthcheck
       - MYSQL_PASSWORD=healthcheck
+      - MYSQL_DATABASE=lambda
       - MYSQL_ROOT_PASSWORD=aurora
+    networks:
+      - macai_network
     healthcheck:
       test:
         [ "CMD-SHELL", "MYSQL_PWD=healthcheck mysqladmin ping -u healthcheck" ]
       timeout: 20s
       retries: 10
     image: mysql:5.7
+    platform: linux/x86_64
     ports:
-      - "3306:3306"
+      - 3306:3306
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:z
 
   lambda:
     command: "scripts/testwatch.sh"
+    restart: on-failure
     depends_on:
       - aurora
     environment:
@@ -29,6 +34,8 @@ services:
       - LOG_LEVEL=debug
       - LOG_COLORS=true
       - AWS_XRAY_CONTEXT_MISSING=LOG_ERROR
+    networks:
+      - macai_network
     image: golang:latest
     tty: true
     volumes:
@@ -36,3 +43,8 @@ services:
       - ~/.aws:/root/.aws:z
       - ~/.gitconfig:/root/.gitconfig:z
     working_dir: /go/src/github.com/macai-project/framework-golang
+
+networks:
+  macai_network:
+    external: false
+    driver: bridge
