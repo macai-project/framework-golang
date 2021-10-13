@@ -54,5 +54,10 @@ func (c *Container) NewSqlClient(ctx context.Context) error {
 	}
 	c.Logger.Debug("SQL Connected!")
 
+	c.DB.SetMaxOpenConns(1)
+	c.DB.SetMaxIdleConns(1)
+	c.DB.SetConnMaxLifetime(-1)
+	c.DB.SetConnMaxIdleTime(-1)
+
 	return err
 }
