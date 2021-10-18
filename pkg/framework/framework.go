@@ -34,8 +34,7 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 	// AWS Config
 	err = c.NewAWSConfig()
 	if err != nil {
-		c.Logger.Fatalf("Error initializing AWS Config: %s", err)
-		return "AWS Error", err
+		return "error initializing AWS Config", err
 	}
 
 	// Sentry
@@ -45,8 +44,7 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 		TracesSampleRate: 0.2,
 	})
 	if err != nil {
-		c.Logger.Fatalf("sentry.Init: %s", err)
-		return "sentry.Init", err
+		return "error in sentry.Init", err
 	}
 	// Flush buffered events before the program terminates.
 	// Set the timeout to the maximum duration the program can afford to wait.
