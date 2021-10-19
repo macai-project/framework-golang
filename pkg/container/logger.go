@@ -11,7 +11,7 @@ func (c *Container) NewLogger() {
 	if os.Getenv("LOG_LEVEL") == "debug" {
 		logger, _ = zap.NewDevelopment()
 	}
-	c.Logger =logger.Sugar()
+	c.Logger = logger.Sugar()
 }
 
 // Flush buffers, if any
