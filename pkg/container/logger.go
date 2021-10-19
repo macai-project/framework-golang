@@ -12,7 +12,7 @@ import (
 // NewLogger create a new Logger
 func (c *Container) NewLogger() {
 	logger, _ := zap.NewProduction(zap.Hooks(func(entry zapcore.Entry) error {
-		if entry.Level == zapcore.ErrorLevel {
+		if entry.Level == zapcore.WarnLevel {
 			defer sentry.Flush(2 * time.Second)
 			sentry.CaptureMessage(fmt.Sprintf("%s, Line No: %d :: %s", entry.Caller.File, entry.Caller.Line, entry.Message))
 		}
@@ -20,7 +20,7 @@ func (c *Container) NewLogger() {
 	}))
 	if os.Getenv("LOG_LEVEL") == "debug" {
 		logger, _ = zap.NewDevelopment(zap.Hooks(func(entry zapcore.Entry) error {
-			if entry.Level == zapcore.ErrorLevel {
+			if entry.Level == zapcore.WarnLevel {
 				defer sentry.Flush(2 * time.Second)
 				sentry.CaptureMessage(fmt.Sprintf("%s, Line No: %d :: %s", entry.Caller.File, entry.Caller.Line, entry.Message))
 			}
