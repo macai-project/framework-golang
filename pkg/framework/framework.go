@@ -29,6 +29,7 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 
 	// Logger
 	c.NewLogger()
+	defer c.Logger.Sync()
 
 	// AWS Config
 	err = c.NewAWSConfig()
@@ -52,11 +53,6 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 	result, err := businessLogicHandler(ctx, c, e)
 	if err != nil {
 		sentry.CaptureException(err)
-	}
-
-	err = c.Logger.Sync()
-	if err != nil {
-		return "error in Logger.Sync", err
 	}
 	return result, err
 }

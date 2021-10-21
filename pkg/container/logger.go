@@ -31,10 +31,6 @@ func (c *Container) NewLogger() {
 }
 
 // Flush buffers, if any
-func (c *Container) Flush() error {
-	err := c.Logger.Sync()
-	if err != nil {
-		return fmt.Errorf("error flushing Zap Logger buffer")
-	}
-	return nil
+func (c *Container) Flush() {
+	c.Logger.Sync()
 }
