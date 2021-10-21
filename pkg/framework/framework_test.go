@@ -13,7 +13,10 @@ import (
 var co *container.Container
 
 func businessLogic(ctx context.Context, c *container.Container, e events.CloudWatchEvent) (string, error) {
-	c.NewSqlClient(ctx)
+	err := c.NewSqlClient(ctx)
+	if err != nil {
+		return "error in new sql client", err
+	}
 	return "ok", nil
 }
 
