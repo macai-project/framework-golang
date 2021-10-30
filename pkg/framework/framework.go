@@ -25,9 +25,16 @@ func RegisterBusinessLogic(f func(ctx context.Context, c *container.Container, e
 func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error) {
 	var err error
 
-	c, err = container.Bootstrap()
+	c = &container.Container{}
+
+	// Logger
+	c.NewLogger()
+	defer c.Logger.Sync()
+
+	// AWS Config
+	err = c.NewAWSConfig()
 	if err != nil {
-		return err.Error(), err
+		return "error initializing AWS Config", err
 	}
 
 	// Sentry
