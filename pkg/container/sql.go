@@ -18,7 +18,7 @@ func (c *Container) NewSqlClient(ctx context.Context) error {
 	// Open SQL Connection
 	c.DB, err = xray.SQLContext("mysql", fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", os.Getenv("AURORA_USERNAME"), os.Getenv("AURORA_PASSWORD"), os.Getenv("AURORA_HOSTNAME"), os.Getenv("AURORA_DATABASE")))
 	if err != nil {
-		return fmt.Errorf("error in SQL Connection")
+		return fmt.Errorf("error in SQL Connection: %w", err)
 	}
 	c.Logger.Debug("SQL Connection Opened")
 
@@ -30,7 +30,7 @@ func (c *Container) NewSqlClient(ctx context.Context) error {
 	// Check connection
 	err = c.DB.PingContext(ctx)
 	if err != nil {
-		return fmt.Errorf("error in SQL Ping")
+		return fmt.Errorf("error in SQL Ping: %w", err)
 	}
 	c.Logger.Debug("SQL Connected!")
 
