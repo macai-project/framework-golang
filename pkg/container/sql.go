@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-xray-sdk-go/xray"
 	_ "github.com/go-sql-driver/mysql"
 	"os"
+	"time"
 )
 
 func (c *Container) NewSqlClient(ctx context.Context) error {
@@ -18,17 +19,19 @@ func (c *Container) NewSqlClient(ctx context.Context) error {
 	}
 	c.Logger.Debug("SQL Connection Opened")
 
-	c.DB.SetMaxOpenConns(1)
-	c.DB.SetMaxIdleConns(1)
-	c.DB.SetConnMaxLifetime(-1)
-	//c.DB.SetConnMaxIdleTime(-1)
+	c.DB.SetMaxOpenConns(2)
+	c.DB.SetMaxIdleConns(2)
+	c.DB.SetConnMaxLifetime(30 * time.Minute)
 
 	// Check connection
 	err = c.DB.PingContext(ctx)
 	if err != nil {
+		c.DB.Close()
 		return fmt.Errorf("error in SQL Ping: %w", err)
 	}
-	c.Logger.Debug("SQL Connected!")
+	c.Logger.With(
+		"Stats", c.DB.Stats(),
+		).Info("SQL Connected!")
 
 	return err
 }
