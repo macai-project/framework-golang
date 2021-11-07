@@ -17,6 +17,10 @@ func businessLogic(ctx context.Context, c *container.Container, e events.CloudWa
 	return "ok", nil
 }
 
+func init() {
+	co = &container.Container{}
+}
+
 func TestHandleRequest(t *testing.T) {
 
 	RegisterContainer(co)

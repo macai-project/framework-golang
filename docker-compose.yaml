@@ -20,10 +20,10 @@ services:
       - 3306:3306
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:z
+    logging:
+      driver: none
 
   lambda:
-    command: "scripts/testwatch.sh"
-    restart: on-failure
     depends_on:
       - aurora
     environment:
@@ -36,12 +36,17 @@ services:
       - AWS_XRAY_CONTEXT_MISSING=LOG_ERROR
     networks:
       - macai_network
-    image: golang:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     tty: true
     volumes:
       - ~/go:/go:z
       - ~/.aws:/root/.aws:z
+      - ~/.ssh:/.ssh:z
       - ~/.gitconfig:/root/.gitconfig:z
+    ports:
+      - "2345:2345"
     working_dir: /go/src/github.com/macai-project/framework-golang
 
 networks:

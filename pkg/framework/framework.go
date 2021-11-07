@@ -2,6 +2,7 @@ package framework
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/getsentry/sentry-go"
 	"github.com/macai-project/framework-golang/pkg/container"
@@ -25,7 +26,10 @@ func RegisterBusinessLogic(f func(ctx context.Context, c *container.Container, e
 func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error) {
 	var err error
 
-	c = &container.Container{}
+	// Check if the container has been initialized
+	if c == nil {
+		return "", fmt.Errorf("container struct must be initialized and passed to the framework")
+	}
 
 	// Logger
 	c.NewLogger()
