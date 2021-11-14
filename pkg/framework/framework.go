@@ -45,7 +45,6 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 	sentryDSN, _ := os.LookupEnv("SENTRY_DSN")
 	err = sentry.Init(sentry.ClientOptions{
 		Dsn:              sentryDSN,
-		TracesSampleRate: 0.2,
 	})
 	if err != nil {
 		return "error in sentry.Init", err
