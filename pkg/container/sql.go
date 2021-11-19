@@ -13,7 +13,7 @@ func (c *Container) NewSqlClient(ctx context.Context) error {
 	var err error
 
 	// If the connection already exists return nil and do nothing
-	if c.DB.Ping() == nil {
+	if c.DB != nil && c.DB.Ping() == nil {
 		c.Logger.With("Stats", c.DB.Stats()).Debug("Reusing SQL Connection")
 		return nil
     }
