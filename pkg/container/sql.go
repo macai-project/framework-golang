@@ -12,6 +12,12 @@ import (
 func (c *Container) NewSqlClient(ctx context.Context) error {
 	var err error
 
+	// If the connection already exists return nil and do nothing
+	if c.DB.Ping() == nil {
+		c.Logger.With("Stats", c.DB.Stats()).Debug("Reusing SQL Connection")
+		return nil
+    }
+
 	// Open SQL Connection
 	c.DB, err = xray.SQLContext("mysql", fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", os.Getenv("AURORA_USERNAME"), os.Getenv("AURORA_PASSWORD"), os.Getenv("AURORA_HOSTNAME"), os.Getenv("AURORA_DATABASE")))
 	if err != nil {

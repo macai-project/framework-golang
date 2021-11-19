@@ -10,7 +10,9 @@ import (
 
 // NewEventbridgeClient create a new Eventbridge client
 func (c *Container) NewEventbridgeClient() {
-	c.EventBridgeClient = eventbridge.NewFromConfig(c.awsConfig)
+	if c.EventBridgeClient == nil {
+		c.EventBridgeClient = eventbridge.NewFromConfig(c.awsConfig)
+    }
 }
 
 func (c *Container) EventInput(event interface{}, detailType string, eventBus string, source string, resources ...string) (*eventbridge.PutEventsInput, error) {

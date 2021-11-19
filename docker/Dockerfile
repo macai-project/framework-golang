@@ -1,4 +1,4 @@
-FROM golang:1.17.3-bullseye
+FROM golang:1.17-bullseye
 
 RUN apt-get update && \
     apt-get install -y inotify-tools
