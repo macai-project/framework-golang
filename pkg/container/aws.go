@@ -2,8 +2,11 @@ package container
 
 import (
 	"context"
+	"fmt"
+	awsV1 "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go/aws/session"
 	"os"
 )
 
@@ -34,4 +37,23 @@ func (c *Container) NewAWSConfig() error {
 	}
 	c.Logger.Debug("AWS Config loaded")
 	return nil
+}
+
+func (c *Container) NewAWSConfigV1() error {
+
+	c.Session = session.Must(session.NewSession())
+
+	awsEndpoint := os.Getenv("AWS_ENDPOINT")
+	awsRegion := os.Getenv("AWS_REGION")
+
+	if awsEndpoint != "" && awsRegion != "" {
+		c.awsConfigV1 = awsV1.Config{
+            Endpoint: awsV1.String(awsEndpoint),
+            Region: awsV1.String(awsRegion),
+        }
+		c.Logger.Debug("AWS Config V1 loaded")
+		return nil
+	}
+
+	return fmt.Errorf("no endpoint or region set")
 }
