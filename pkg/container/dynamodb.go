@@ -9,7 +9,7 @@ import (
 func (c *Container) NewDynamoDBClient() {
 	if c.DynamoDBClient == nil {
 		c.DynamoDBClient = dynamodb.NewFromConfig(c.awsConfig)
-    }
+	}
 }
 
 // NewDynamoDBORM create a new DynamoDBORM client

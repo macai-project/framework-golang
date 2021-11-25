@@ -8,5 +8,5 @@ import (
 func (c *Container) NewS3Client() {
 	if c.S3Client == nil {
 		c.S3Client = s3.NewFromConfig(c.awsConfig)
-    }
+	}
 }

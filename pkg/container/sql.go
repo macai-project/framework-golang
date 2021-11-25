@@ -16,7 +16,7 @@ func (c *Container) NewSqlClient(ctx context.Context) error {
 	if c.DB != nil && c.DB.Ping() == nil {
 		c.Logger.With("Stats", c.DB.Stats()).Debug("Reusing SQL Connection")
 		return nil
-    }
+	}
 
 	// Open SQL Connection
 	c.DB, err = xray.SQLContext("mysql", fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", os.Getenv("AURORA_USERNAME"), os.Getenv("AURORA_PASSWORD"), os.Getenv("AURORA_HOSTNAME"), os.Getenv("AURORA_DATABASE")))
@@ -37,7 +37,7 @@ func (c *Container) NewSqlClient(ctx context.Context) error {
 	}
 	c.Logger.With(
 		"Stats", c.DB.Stats(),
-		).Info("SQL Connected!")
+	).Info("SQL Connected!")
 
 	return err
 }

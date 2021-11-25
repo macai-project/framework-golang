@@ -14,8 +14,8 @@ func (c *Container) NewLogger() {
 
 	// If the logger is already instantiated, do nothing
 	if c.Logger != nil {
-        return
-    }
+		return
+	}
 
 	logger, _ := zap.NewProduction(zap.Hooks(func(entry zapcore.Entry) error {
 		if entry.Level == zapcore.WarnLevel {

@@ -8,5 +8,5 @@ import (
 func (c *Container) NewSecretsManagerClient() {
 	if c.SecretsManagerClient == nil {
 		c.SecretsManagerClient = secretsmanager.NewFromConfig(c.awsConfig)
-    }
+	}
 }

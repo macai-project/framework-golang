@@ -3,9 +3,9 @@ package container
 import (
 	"context"
 	"fmt"
-	awsV1 "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
+	awsV1 "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"os"
 )
@@ -48,9 +48,9 @@ func (c *Container) NewAWSConfigV1() error {
 
 	if awsEndpoint != "" && awsRegion != "" {
 		c.awsConfigV1 = awsV1.Config{
-            Endpoint: awsV1.String(awsEndpoint),
-            Region: awsV1.String(awsRegion),
-        }
+			Endpoint: awsV1.String(awsEndpoint),
+			Region:   awsV1.String(awsRegion),
+		}
 		c.Logger.Debug("AWS Config V1 loaded")
 		return nil
 	}
