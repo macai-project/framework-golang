@@ -36,13 +36,7 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 	c.NewLogger()
 	defer c.Logger.Sync()
 
-	// AWS Config V1
-	err = c.NewAWSConfigV1()
-	if err != nil {
-		return "error initializing AWS Config V1", err
-	}
-
-	// AWS Config V2
+	// AWS Config
 	err = c.NewAWSConfig()
 	if err != nil {
 		return "error initializing AWS Config", err
