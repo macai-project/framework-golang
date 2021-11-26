@@ -31,7 +31,7 @@ func (c *Container) NewAWSConfig() error {
 		return aws.Endpoint{}, &aws.EndpointNotFoundError{}
 	})
 
-	c.awsConfig, err = config.LoadDefaultConfig(context.TODO(), config.WithEndpointResolver(customResolver))
+	c.AwsConfig, err = config.LoadDefaultConfig(context.Background(), config.WithEndpointResolver(customResolver))
 	if err != nil {
 		return err
 	}
@@ -47,7 +47,7 @@ func (c *Container) NewAWSConfigV1() error {
 	awsRegion := os.Getenv("AWS_REGION")
 
 	if awsEndpoint != "" && awsRegion != "" {
-		c.awsConfigV1 = awsV1.Config{
+		c.AwsConfigV1 = awsV1.Config{
 			Endpoint: awsV1.String(awsEndpoint),
 			Region:   awsV1.String(awsRegion),
 		}

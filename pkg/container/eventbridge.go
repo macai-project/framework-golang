@@ -11,7 +11,7 @@ import (
 // NewEventbridgeClient create a new Eventbridge client
 func (c *Container) NewEventbridgeClient() {
 	if c.EventBridgeClient == nil {
-		c.EventBridgeClient = eventbridge.NewFromConfig(c.awsConfig)
+		c.EventBridgeClient = eventbridge.NewFromConfig(c.AwsConfig)
 	}
 }
 

@@ -16,8 +16,8 @@ import (
 
 // Container is the container used to inject dependencies into the flow
 type Container struct {
-	awsConfig            aws.Config
-	awsConfigV1          awsV1.Config
+	AwsConfig            aws.Config
+	AwsConfigV1          awsV1.Config
 	DB                   *sql.DB
 	CloudwatchClient     *cloudwatch.Client
 	EventBridgeClient    *eventbridge.Client

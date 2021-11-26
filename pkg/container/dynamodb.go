@@ -10,21 +10,21 @@ import (
 // NewDynamoDBClient create a new DynamoDBClient client
 func (c *Container) NewDynamoDBClient() {
 	if c.DynamoDBClient == nil {
-		c.DynamoDBClient = dynamodb.NewFromConfig(c.awsConfig)
+		c.DynamoDBClient = dynamodb.NewFromConfig(c.AwsConfig)
 	}
 }
 
 // NewDynamoDBORM create a new DynamoDBORM client
 func (c *Container) NewDynamoDBORM() {
 	if c.DynamoDBORM == nil {
-		c.DynamoDBORM = dynamo.New(c.Session, &c.awsConfigV1)
+		c.DynamoDBORM = dynamo.New(c.Session, &c.AwsConfigV1)
 	}
 }
 
 // NewDynamoDBORM create a new DynamoDBORM client
 func (c *Container) NewDynamoDBORMXray() {
 	if c.DynamoDBORM == nil {
-		customClient := dynamoDBV1.New(c.Session, &c.awsConfigV1)
+		customClient := dynamoDBV1.New(c.Session, &c.AwsConfigV1)
 		xray.AWS(customClient.Client)
 		c.DynamoDBORM = dynamo.NewFromIface(customClient)
 	}

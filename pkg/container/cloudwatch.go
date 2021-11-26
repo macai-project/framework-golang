@@ -7,6 +7,6 @@ import (
 // NewCloudwatchClient create a new Cloudwatch client
 func (c *Container) NewCloudwatchClient() {
 	if c.CloudwatchClient == nil {
-		c.CloudwatchClient = cloudwatch.NewFromConfig(c.awsConfig)
+		c.CloudwatchClient = cloudwatch.NewFromConfig(c.AwsConfig)
 	}
 }

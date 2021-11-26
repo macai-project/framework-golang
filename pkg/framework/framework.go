@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-xray-sdk-go/instrumentation/awsv2"
 	"github.com/getsentry/sentry-go"
 	"github.com/macai-project/framework-golang/pkg/container"
 	"os"
@@ -57,6 +58,10 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 		Dsn:              sentryDSN,
 		TracesSampleRate: samplingRate,
 	})
+
+	// Xray
+	awsv2.AWSV2Instrumentor(&c.AwsConfig.APIOptions)
+
 	if err != nil {
 		return "error in sentry.Init", err
 	}
