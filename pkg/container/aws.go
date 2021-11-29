@@ -11,7 +11,7 @@ import (
 )
 
 // NewAWSConfig create a new AWS config object
-func (c *Container) NewAWSConfig() error {
+func (c *Container) NewAWSConfig(ctx context.Context) error {
 	var err error
 
 	// Create resolver for localstack if AWS_ENDPOINT and AWS_REGION are specified
@@ -31,7 +31,7 @@ func (c *Container) NewAWSConfig() error {
 		return aws.Endpoint{}, &aws.EndpointNotFoundError{}
 	})
 
-	c.AwsConfig, err = config.LoadDefaultConfig(context.Background(), config.WithEndpointResolver(customResolver))
+	c.AwsConfig, err = config.LoadDefaultConfig(ctx, config.WithEndpointResolver(customResolver))
 	if err != nil {
 		return err
 	}
