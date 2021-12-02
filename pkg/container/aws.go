@@ -2,7 +2,6 @@ package container
 
 import (
 	"context"
-	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	awsV1 "github.com/aws/aws-sdk-go/aws"
@@ -51,9 +50,9 @@ func (c *Container) NewAWSConfigV1() error {
 			Endpoint: awsV1.String(awsEndpoint),
 			Region:   awsV1.String(awsRegion),
 		}
-		c.Logger.Debug("AWS Config V1 loaded")
 		return nil
 	}
-
-	return fmt.Errorf("no endpoint or region set")
+	c.AwsConfigV1 = awsV1.Config{}
+	c.Logger.Debug("AWS Config V1 loaded")
+	return nil
 }
