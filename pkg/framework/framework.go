@@ -49,13 +49,22 @@ func HandleRequest(ctx context.Context, e events.CloudWatchEvent) (string, error
 		c.Logger.Warnf("error fetching SENTRY_DSN, sentry won't sample")
 		sentryDSN = ""
 	}
+
 	samplingRate, err := strconv.ParseFloat(os.Getenv("SENTRY_SAMPLING_RATE"), 64)
 	if err != nil {
 		c.Logger.Warnf("error converting SENTRY_SAMPLING_RATE to float64, set to 1.0")
 		samplingRate = 1.0
 	}
+
+	environment, ok := os.LookupEnv("ENVIRONMENT")
+	if ok != true {
+		c.Logger.Warnf("error fetching ENVIRONMENT, setting empty environment")
+		environment = ""
+	}
+
 	err = sentry.Init(sentry.ClientOptions{
 		Dsn:              sentryDSN,
+		Environment:      environment,
 		TracesSampleRate: samplingRate,
 	})
 
