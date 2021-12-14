@@ -40,18 +40,23 @@ func (c *Container) NewAWSConfig(ctx context.Context) error {
 
 func (c *Container) NewAWSConfigV1() error {
 
-	c.Session = session.Must(session.NewSession())
-
 	awsEndpoint := os.Getenv("AWS_ENDPOINT")
 	awsRegion := os.Getenv("AWS_REGION")
+	profile := os.Getenv("AWS_PROFILE")
 
-	if awsEndpoint != "" && awsRegion != "" {
+	if awsEndpoint != "" && awsRegion != "" && profile != "" {
+		c.Session = session.Must(session.NewSessionWithOptions(session.Options{
+			Profile: profile,
+		}))
+
 		c.AwsConfigV1 = awsV1.Config{
 			Endpoint: awsV1.String(awsEndpoint),
 			Region:   awsV1.String(awsRegion),
 		}
 		return nil
 	}
+
+	c.Session = session.Must(session.NewSession())
 	c.AwsConfigV1 = awsV1.Config{}
 	c.Logger.Debug("AWS Config V1 loaded")
 	return nil
