@@ -5,6 +5,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	awsV1 "github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"os"
 )
@@ -50,8 +51,10 @@ func (c *Container) NewAWSConfigV1() error {
 		}))
 
 		c.AwsConfigV1 = awsV1.Config{
-			Endpoint: awsV1.String(awsEndpoint),
-			Region:   awsV1.String(awsRegion),
+			Credentials: credentials.NewStaticCredentials("not", "empty", ""),
+			DisableSSL:  aws.Bool(true),
+			Endpoint:    awsV1.String(awsEndpoint),
+			Region:      awsV1.String(awsRegion),
 		}
 		return nil
 	}
