@@ -3,6 +3,7 @@ package container
 import (
 	"database/sql"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/appsync"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
@@ -21,6 +22,7 @@ type Container struct {
 	DB                   *sql.DB
 	CloudwatchClient     *cloudwatch.Client
 	EventBridgeClient    *eventbridge.Client
+	AppSyncClient        *appsync.Client
 	DynamoDBClient       *dynamodb.Client
 	DynamoDBORM          *dynamo.DB
 	Session              *session.Session
