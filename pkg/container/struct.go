@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	awsV1 "github.com/aws/aws-sdk-go/aws"
@@ -29,4 +30,5 @@ type Container struct {
 	S3Client             *s3.Client
 	Logger               *zap.SugaredLogger
 	SecretsManagerClient *secretsmanager.Client
+	PinpointClient       *pinpoint.Client
 }
