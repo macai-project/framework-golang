@@ -3,6 +3,7 @@ module github.com/macai-project/framework-golang
 go 1.14
 
 require (
+	github.com/macai-project/framework-golang v1.0.46
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/aws/aws-lambda-go v1.27.0
 	github.com/aws/aws-sdk-go v1.42.11

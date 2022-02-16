@@ -143,7 +143,7 @@ func HandleRequestS3(ctx context.Context, e events.S3Event) (string, error) {
 	// Set the timeout to the maximum duration the program can afford to wait.
 	defer sentry.Flush(1 * time.Second)
 
-	result, err := businessLogicHandler(ctx, c, e)
+	result, err := businessLogicHandlerS3(ctx, c, e)
 	if err != nil {
 		sentry.CaptureException(err)
 	}
