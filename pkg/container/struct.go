@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
+	"github.com/aws/aws-sdk-go-v2/service/ses"
 	awsV1 "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/guregu/dynamo"
@@ -31,4 +32,5 @@ type Container struct {
 	Logger               *zap.SugaredLogger
 	SecretsManagerClient *secretsmanager.Client
 	PinpointClient       *pinpoint.Client
+	SESClient            *ses.Client
 }
