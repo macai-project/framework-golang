@@ -5,8 +5,15 @@ import (
 )
 
 // NewCloudsearchClient create a new Cloudsearch client
-func (c *Container) NewCloudsearchClient() {
+func (c *Container) NewCloudsearchClient(endpoint string) {
 	if c.CloudsearchClient == nil {
-		c.CloudsearchClient = cloudsearchdomain.NewFromConfig(c.AwsConfig)
+		c.CloudsearchClient = cloudsearchdomain.NewFromConfig(
+			c.AwsConfig,
+			cloudsearchdomain.WithEndpointResolver(
+				cloudsearchdomain.EndpointResolverFromURL(
+					endpoint,
+				),
+			),
+		)
 	}
 }
