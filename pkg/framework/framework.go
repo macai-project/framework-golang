@@ -16,6 +16,7 @@ var c *container.Container
 
 var businessLogicHandler func(ctx context.Context, c *container.Container, e events.CloudWatchEvent) (string, error)
 var businessLogicHandlerS3 func(ctx context.Context, c *container.Container, e events.S3Event) (string, error)
+var businessLogicHandlerDynamoDBEvent func(ctx context.Context, c *container.Container, e events.DynamoDBEvent) (string, error)
 var businessGenericLogicHandler func(ctx context.Context, c *container.Container, e interface{}) (string, error)
 
 func RegisterContainer(fc *container.Container) {
@@ -28,6 +29,10 @@ func RegisterBusinessLogic(f func(ctx context.Context, c *container.Container, e
 
 func RegisterBusinessLogicS3(f func(ctx context.Context, c *container.Container, e events.S3Event) (string, error)) {
 	businessLogicHandlerS3 = f
+}
+
+func RegisterBusinessLogicDynamoDBEvent(f func(ctx context.Context, c *container.Container, e events.DynamoDBEvent) (string, error)) {
+	businessLogicHandlerDynamoDBEvent = f
 }
 
 func RegisterGenericBusinessLogic(f func(ctx context.Context, c *container.Container, e interface{}) (string, error)) {
@@ -149,6 +154,66 @@ func HandleRequestS3(ctx context.Context, e events.S3Event) (string, error) {
 	defer sentry.Flush(1 * time.Second)
 
 	result, err := businessLogicHandlerS3(ctx, c, e)
+	if err != nil {
+		sentry.CaptureException(err)
+	}
+	return result, err
+}
+
+func HandleRequestDynamo(ctx context.Context, e events.DynamoDBEvent) (string, error) {
+	var err error
+
+	// Check if the container has been initialized
+	if c == nil {
+		return "", fmt.Errorf("container struct must be initialized and passed to the framework")
+	}
+
+	// Logger
+	c.NewLogger()
+	defer c.Logger.Sync()
+
+	// AWS Config
+	err = c.NewAWSConfig(ctx)
+	if err != nil {
+		return "error initializing AWS Config", err
+	}
+
+	// Sentry
+	sentryDSN, ok := os.LookupEnv("SENTRY_DSN")
+	if ok != true {
+		c.Logger.Warnf("error fetching SENTRY_DSN, sentry won't sample")
+		sentryDSN = ""
+	}
+
+	samplingRate, err := strconv.ParseFloat(os.Getenv("SENTRY_SAMPLING_RATE"), 64)
+	if err != nil {
+		c.Logger.Warnf("error converting SENTRY_SAMPLING_RATE to float64, set to 1.0")
+		samplingRate = 1.0
+	}
+
+	environment, ok := os.LookupEnv("ENVIRONMENT")
+	if ok != true {
+		c.Logger.Warnf("error fetching ENVIRONMENT, setting empty environment")
+		environment = ""
+	}
+
+	err = sentry.Init(sentry.ClientOptions{
+		Dsn:              sentryDSN,
+		Environment:      environment,
+		TracesSampleRate: samplingRate,
+	})
+
+	// Xray
+	awsv2.AWSV2Instrumentor(&c.AwsConfig.APIOptions)
+
+	if err != nil {
+		return "error in sentry.Init", err
+	}
+	// Flush buffered events before the program terminates.
+	// Set the timeout to the maximum duration the program can afford to wait.
+	defer sentry.Flush(1 * time.Second)
+
+	result, err := businessLogicHandlerDynamoDBEvent(ctx, c, e)
 	if err != nil {
 		sentry.CaptureException(err)
 	}
