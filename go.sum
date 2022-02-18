@@ -48,6 +48,8 @@ github.com/aws/aws-sdk-go-v2/internal/ini v1.3.0 h1:c10Z7fWxtJCoyc8rv06jdh9xrKnu
 github.com/aws/aws-sdk-go-v2/internal/ini v1.3.0/go.mod h1:6oXGy4GLpypD3uCh8wcqztigGgmhLToMfjavgh+VySg=
 github.com/aws/aws-sdk-go-v2/service/appsync v1.9.2 h1:LGu9RKZxflp3cfT4KN9I3JIC+C1hUatmGugE5Bpp00E=
 github.com/aws/aws-sdk-go-v2/service/appsync v1.9.2/go.mod h1:VOKFpj+E4nCFiJOr74x+zfKcXrIOOOZ8UO+RCsubbv0=
+github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain v1.9.0 h1:m2feRXhI7zyOJF/Zs3BzFmgs6l1MHiKihNPapSaTEZk=
+github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain v1.9.0/go.mod h1:QozVbxQG6VHxNvo+pEDg6cpFfsTw5guSt/6TtHMPR6I=
 github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.10.0 h1:MNNV0fi3J5Lxxhx8iDlKdRZJrtBv/0FyganA3nBYe8Q=
 github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.10.0/go.mod h1:Oiwhs3Fo9amYOGsJggWBPU6bwa/u0xVpEdOS5HlouPg=
 github.com/aws/aws-sdk-go-v2/service/dynamodb v1.8.1 h1:ghWmv00DvXbMccJzUKcO6KpyM064QcJw8dpaq5Z9Huk=

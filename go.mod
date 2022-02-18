@@ -9,6 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.13.0
 	github.com/aws/aws-sdk-go-v2/config v1.10.0
 	github.com/aws/aws-sdk-go-v2/service/appsync v1.9.2
+	github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.10.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.8.1
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.9.0

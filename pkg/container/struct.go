@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/appsync"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
@@ -23,6 +24,7 @@ type Container struct {
 	AwsConfigV1          awsV1.Config
 	DB                   *sql.DB
 	CloudwatchClient     *cloudwatch.Client
+	CloudsearchClient    *cloudsearchdomain.Client
 	EventBridgeClient    *eventbridge.Client
 	AppSyncClient        *appsync.Client
 	DynamoDBClient       *dynamodb.Client
