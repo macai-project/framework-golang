@@ -1,9 +1,13 @@
 package container
 
-// NewXrayClient create a new XRay client
-func (c *Container) NewXrayClient() error {
+import (
+	"github.com/aws/aws-sdk-go-v2/service/xray"
+)
 
-	// Todo
+// NewXRayClient creates a new XRay client
+func (c *Container) NewXRayClient() {
 
-	return nil
+	if c.XRayClient == nil {
+		c.XRayClient = xray.NewFromConfig(c.AwsConfig)
+	}
 }

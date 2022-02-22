@@ -17,6 +17,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.12.0
+	github.com/aws/aws-sdk-go-v2/service/xray v1.11.0 // indirect
 	github.com/aws/aws-xray-sdk-go v1.6.0
 	github.com/getsentry/sentry-go v0.11.0
 	github.com/go-sql-driver/mysql v1.6.0
