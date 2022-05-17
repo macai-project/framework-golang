@@ -17,6 +17,7 @@ var c *container.Container
 var businessLogicHandler func(ctx context.Context, c *container.Container, e events.CloudWatchEvent) (string, error)
 var businessLogicHandlerS3 func(ctx context.Context, c *container.Container, e events.S3Event) (string, error)
 var businessLogicHandlerDynamoDBEvent func(ctx context.Context, c *container.Container, e events.DynamoDBEvent) (string, error)
+var businessLogicHandlerApiGateway func(ctx context.Context, c *container.Container, e events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
 var businessGenericLogicHandler func(ctx context.Context, c *container.Container, e interface{}) (string, error)
 
 func RegisterContainer(fc *container.Container) {
@@ -33,6 +34,10 @@ func RegisterBusinessLogicS3(f func(ctx context.Context, c *container.Container,
 
 func RegisterBusinessLogicDynamoDBEvent(f func(ctx context.Context, c *container.Container, e events.DynamoDBEvent) (string, error)) {
 	businessLogicHandlerDynamoDBEvent = f
+}
+
+func RegisterBusinessLogicApiGateway(f func(ctx context.Context, c *container.Container, e events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)) {
+	businessLogicHandlerApiGateway = f
 }
 
 func RegisterGenericBusinessLogic(f func(ctx context.Context, c *container.Container, e interface{}) (string, error)) {
