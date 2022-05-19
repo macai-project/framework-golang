@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-xray-sdk-go/instrumentation/awsv2"
+	"github.com/getsentry/sentry-go"
 	"github.com/macai-project/framework-golang/pkg/container"
 	"os"
 	"strconv"
