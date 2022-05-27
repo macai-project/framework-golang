@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	"github.com/aws/aws-sdk-go-v2/service/ses"
+	"github.com/aws/aws-sdk-go-v2/service/sqs"
 	"github.com/aws/aws-sdk-go-v2/service/xray"
 	awsV1 "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -36,5 +37,6 @@ type Container struct {
 	SecretsManagerClient *secretsmanager.Client
 	PinpointClient       *pinpoint.Client
 	SESClient            *ses.Client
+	SQSClient            *sqs.Client
 	XRayClient           *xray.Client
 }
