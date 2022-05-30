@@ -67,6 +67,8 @@ github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.5.0 h1:qGZWS/WgiF
 github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.5.0/go.mod h1:Mq6AEc+oEjCUlBuLiK5YwW4shSOAKCQ3tXN0sQeYoBA=
 github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.9.0 h1:0BOlTqnNnrEO04oYKzDxMMe68t107pmIotn18HtVonY=
 github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.9.0/go.mod h1:xKCZ4YFSF2s4Hnb/J0TLeOsKuGzICzcElaOKNGrVnx4=
+github.com/aws/aws-sdk-go-v2/service/lambda v1.23.1 h1:sDA1G6xYGxD13Payuk1DHdL3WP5M+ThXnu8B/jtq49U=
+github.com/aws/aws-sdk-go-v2/service/lambda v1.23.1/go.mod h1:lKQt+LgUWCTmIqy+f42/QeususXmc6CbOtjnME6znCU=
 github.com/aws/aws-sdk-go-v2/service/pinpoint v1.14.0 h1:AtXy4dOKViryLQ8xsXJvVNscmiYxa5ocn2ZWhjCwXlM=
 github.com/aws/aws-sdk-go-v2/service/pinpoint v1.14.0/go.mod h1:AI8rJmfsysap8U9XI7RXJ4SZb4Jk4wctOERzARmoEfM=
 github.com/aws/aws-sdk-go-v2/service/route53 v1.6.2 h1:OsggywXCk9iFKdu2Aopg3e1oJITIuyW36hA/B0rqupE=

@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
+	"github.com/aws/aws-sdk-go-v2/service/lambda"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
@@ -33,6 +34,7 @@ type Container struct {
 	DynamoDBORM          *dynamo.DB
 	Session              *session.Session
 	S3Client             *s3.Client
+	LambdaClient         *lambda.Client
 	Logger               *zap.SugaredLogger
 	SecretsManagerClient *secretsmanager.Client
 	PinpointClient       *pinpoint.Client
