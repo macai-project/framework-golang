@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	"github.com/aws/aws-sdk-go-v2/service/ses"
+	"github.com/aws/aws-sdk-go-v2/service/sns"
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
 	"github.com/aws/aws-sdk-go-v2/service/xray"
@@ -41,6 +42,7 @@ type Container struct {
 	PinpointClient       *pinpoint.Client
 	SESClient            *ses.Client
 	SQSClient            *sqs.Client
+	SNSClient            *sns.Client
 	SSMClient            *ssm.Client
 	XRayClient           *xray.Client
 }
