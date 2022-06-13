@@ -13,6 +13,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.10.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.8.1
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.9.0
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.7
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.23.1
 	github.com/aws/aws-sdk-go-v2/service/pinpoint v1.14.0
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.18.0

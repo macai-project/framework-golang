@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
+	"github.com/aws/aws-sdk-go-v2/service/firehose"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -31,6 +32,7 @@ type Container struct {
 	CloudwatchClient     *cloudwatch.Client
 	CloudsearchClient    *cloudsearchdomain.Client
 	EventBridgeClient    *eventbridge.Client
+	FirehoseClient       *firehose.Client
 	AppSyncClient        *appsync.Client
 	DynamoDBClient       *dynamodb.Client
 	DynamoDBORM          *dynamo.DB

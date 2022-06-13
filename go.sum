@@ -62,6 +62,8 @@ github.com/aws/aws-sdk-go-v2/service/dynamodb v1.8.1 h1:ghWmv00DvXbMccJzUKcO6Kpy
 github.com/aws/aws-sdk-go-v2/service/dynamodb v1.8.1/go.mod h1:VcM7GRLOiorVkUZd/uCu9XkoId47XkItnuB0gSZCTpI=
 github.com/aws/aws-sdk-go-v2/service/eventbridge v1.9.0 h1:HLkNH0iU1FQefabVhbRSrrMBZTydNDQ2qjwGE+AO760=
 github.com/aws/aws-sdk-go-v2/service/eventbridge v1.9.0/go.mod h1:R1SZJrTxSeTzv+gE2tAcxoEUVDTMbO0uVomfRQOiRvE=
+github.com/aws/aws-sdk-go-v2/service/firehose v1.14.7 h1:vvhoaIMLKQtvp4ImivIvJVnQPyeVUwJ3ca7gZP1myno=
+github.com/aws/aws-sdk-go-v2/service/firehose v1.14.7/go.mod h1:KMNJrLDVaNbECmGJGvU706JooGwrM2u6XRnvFzvoiEc=
 github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.5.0 h1:lPLbw4Gn59uoKqvOfSnkJr54XWk5Ak1NK20ZEiSWb3U=
 github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.5.0/go.mod h1:80NaCIH9YU3rzTTs/J/ECATjXuRqzo/wB6ukO6MZ0XY=
 github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.3.1 h1:Evkn3RGNdVBPEK5oO2/yj09nYkTQn0133PlvWA2vTb8=
