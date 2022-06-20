@@ -3,23 +3,24 @@ package framework
 import (
 	"context"
 	"fmt"
+	"os"
+	"strconv"
+	"time"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-xray-sdk-go/instrumentation/awsv2"
 	"github.com/getsentry/sentry-go"
 	"github.com/macai-project/framework-golang/pkg/container"
-	"os"
-	"strconv"
-	"time"
 )
 
-var businessLogicHandlerAppsync func(ctx context.Context, c *container.Container, e events.AppSyncResolverTemplate) (string, error)
+var businessLogicHandlerAppsync func(ctx context.Context, c *container.Container, e events.AppSyncResolverTemplate) (interface{}, error)
 
-func RegisterBusinessLogicAppsync(f func(ctx context.Context, c *container.Container, e events.AppSyncResolverTemplate) (string, error)) {
+func RegisterBusinessLogicAppsync(f func(ctx context.Context, c *container.Container, e events.AppSyncResolverTemplate) (interface{}, error)) {
 	businessLogicHandlerAppsync = f
 }
 
 // HandleRequestAppsync start the framework
-func HandleRequestAppsync(ctx context.Context, e events.AppSyncResolverTemplate) (string, error) {
+func HandleRequestAppsync(ctx context.Context, e events.AppSyncResolverTemplate) (interface{}, error) {
 	var err error
 
 	// Check if the container has been initialized
@@ -76,5 +77,6 @@ func HandleRequestAppsync(ctx context.Context, e events.AppSyncResolverTemplate)
 	if err != nil {
 		sentry.CaptureException(err)
 	}
+  
 	return result, err
 }
