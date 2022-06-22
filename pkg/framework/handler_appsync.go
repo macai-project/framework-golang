@@ -12,19 +12,22 @@ import (
 	"github.com/macai-project/framework-golang/pkg/container"
 )
 
-var businessLogicHandlerAppsync func(ctx context.Context, c *container.Container, e interface{}) (interface{}, error)
+var businessLogicHandlerAppsync func(ctx context.Context, c *container.Container, e map[string]interface{}) (map[string]interface{}, error)
 
-func RegisterBusinessLogicAppsync(f func(ctx context.Context, c *container.Container, e interface{}) (interface{}, error)) {
+func RegisterBusinessLogicAppsync(f func(ctx context.Context, c *container.Container, e map[string]interface{}) (map[string]interface{}, error)) {
 	businessLogicHandlerAppsync = f
 }
 
 // HandleRequestAppsync start the framework
-func HandleRequestAppsync(ctx context.Context, e interface{}) (interface{}, error) {
+func HandleRequestAppsync(ctx context.Context, e map[string]interface{}) (map[string]interface{}, error) {
 	var err error
+  response := make(map[string]interface{})
+
 
 	// Check if the container has been initialized
 	if c == nil {
-		return "Container not initialized", fmt.Errorf("container struct must be initialized and passed to the framework")
+    response["error"] = "Container not initialized"
+    return response, fmt.Errorf("container struct must be initialized and passed to the framework")
 	}
 
 	// Logger
@@ -34,7 +37,8 @@ func HandleRequestAppsync(ctx context.Context, e interface{}) (interface{}, erro
 	// AWS Config
 	err = c.NewAWSConfig(ctx)
 	if err != nil {
-		return "AWS Config not initialized", err
+    response["error"] = "AWS Config not initialized"
+		return response, err
 	}
 
 	// Sentry
@@ -62,7 +66,8 @@ func HandleRequestAppsync(ctx context.Context, e interface{}) (interface{}, erro
 		TracesSampleRate: samplingRate,
 	})
 	if err != nil {
-		return "Sentry not initialized", err
+    response["error"] = "Sentry not initialized"
+		return response, err
 	}
 
 	// Xray
