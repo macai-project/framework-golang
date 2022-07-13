@@ -6,11 +6,12 @@ require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/aws/aws-lambda-go v1.27.0
 	github.com/aws/aws-sdk-go v1.42.11
-	github.com/aws/aws-sdk-go-v2 v1.16.5
+	github.com/aws/aws-sdk-go-v2 v1.16.7
 	github.com/aws/aws-sdk-go-v2/config v1.10.0
 	github.com/aws/aws-sdk-go-v2/service/appsync v1.9.2
 	github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.10.0
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.8.1
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.7

@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/appsync"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge"
 	"github.com/aws/aws-sdk-go-v2/service/firehose"
@@ -47,4 +48,5 @@ type Container struct {
 	SNSClient            *sns.Client
 	SSMClient            *ssm.Client
 	XRayClient           *xray.Client
+	CognitoClient        *cognitoidentityprovider.Client
 }
