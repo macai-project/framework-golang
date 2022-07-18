@@ -5,11 +5,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-xray-sdk-go/instrumentation/awsv2"
-	"github.com/getsentry/sentry-go"
 	"github.com/macai-project/framework-golang/pkg/container"
-	"os"
-	"strconv"
-	"time"
 )
 
 var businessLogicHandlerS3 func(ctx context.Context, c *container.Container, e events.S3Event) (string, error)
@@ -36,44 +32,10 @@ func HandleRequestS3(ctx context.Context, e events.S3Event) (string, error) {
 		return "error initializing AWS Config", err
 	}
 
-	// Sentry
-	sentryDSN, ok := os.LookupEnv("SENTRY_DSN")
-	if ok != true {
-		c.Logger.Warnf("error fetching SENTRY_DSN, sentry won't sample")
-		sentryDSN = ""
-	}
-
-	samplingRate, err := strconv.ParseFloat(os.Getenv("SENTRY_SAMPLING_RATE"), 64)
-	if err != nil {
-		c.Logger.Warnf("error converting SENTRY_SAMPLING_RATE to float64, set to 1.0")
-		samplingRate = 1.0
-	}
-
-	environment, ok := os.LookupEnv("ENVIRONMENT")
-	if ok != true {
-		c.Logger.Warnf("error fetching ENVIRONMENT, setting empty environment")
-		environment = ""
-	}
-
-	err = sentry.Init(sentry.ClientOptions{
-		Dsn:              sentryDSN,
-		Environment:      environment,
-		TracesSampleRate: samplingRate,
-	})
-
 	// Xray
 	awsv2.AWSV2Instrumentor(&c.AwsConfig.APIOptions)
 
-	if err != nil {
-		return "error in sentry.Init", err
-	}
-	// Flush buffered events before the program terminates.
-	// Set the timeout to the maximum duration the program can afford to wait.
-	defer sentry.Flush(1 * time.Second)
-
 	result, err := businessLogicHandlerS3(ctx, c, e)
-	if err != nil {
-		sentry.CaptureException(err)
-	}
+
 	return result, err
 }
