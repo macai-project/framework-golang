@@ -3,7 +3,6 @@ package container
 import (
 	"database/sql"
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/appsync"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
@@ -22,6 +21,7 @@ import (
 	awsV1 "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/guregu/dynamo"
+	appsync "github.com/sony/appsync-client-go"
 	"go.uber.org/zap"
 )
 
@@ -29,12 +29,13 @@ import (
 type Container struct {
 	AwsConfig            aws.Config
 	AwsConfigV1          awsV1.Config
+	AppSyncClient        *appsync.Client
 	DB                   *sql.DB
 	CloudwatchClient     *cloudwatch.Client
 	CloudsearchClient    *cloudsearchdomain.Client
+	CognitoClient        *cognitoidentityprovider.Client
 	EventBridgeClient    *eventbridge.Client
 	FirehoseClient       *firehose.Client
-	AppSyncClient        *appsync.Client
 	DynamoDBClient       *dynamodb.Client
 	DynamoDBORM          *dynamo.DB
 	Session              *session.Session
@@ -48,5 +49,4 @@ type Container struct {
 	SNSClient            *sns.Client
 	SSMClient            *ssm.Client
 	XRayClient           *xray.Client
-	CognitoClient        *cognitoidentityprovider.Client
 }

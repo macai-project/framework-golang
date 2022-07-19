@@ -1,12 +1,13 @@
 package container
 
 import (
-	"github.com/aws/aws-sdk-go-v2/service/appsync"
+	appsync "github.com/sony/appsync-client-go"
+	"github.com/sony/appsync-client-go/graphql"
 )
 
-// NewAppSyncClient creates a new NewAppSyncClient client
-func (c *Container) NewAppSyncClient() {
+// NewAppSyncClient creates a new AppSyncClient client
+func (c *Container) NewAppSyncClient(url string) {
 	if c.AppSyncClient == nil {
-		c.AppSyncClient = appsync.NewFromConfig(c.AwsConfig)
+		c.AppSyncClient = appsync.NewClient(appsync.NewGraphQLClient(graphql.NewClient(url)))
 	}
 }
