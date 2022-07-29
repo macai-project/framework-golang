@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-xray-sdk-go/instrumentation/awsv2"
+	"github.com/aws/aws-xray-sdk-go/xray"
 	"github.com/macai-project/framework-golang/pkg/container"
 )
 
@@ -34,6 +35,13 @@ func HandleRequestDynamo(ctx context.Context, e events.DynamoDBEvent) (string, e
 
 	// Xray
 	awsv2.AWSV2Instrumentor(&c.AwsConfig.APIOptions)
+
+	ctx, err = xray.ContextWithConfig(ctx, xray.Config{})
+	if err != nil {
+		c.Logger.Error(err)
+		return "error configuring xray", err
+	}
+	c.Logger.Debug("X-Ray context initialized")
 
 	result, err := businessLogicHandlerDynamoDBEvent(ctx, c, e)
 

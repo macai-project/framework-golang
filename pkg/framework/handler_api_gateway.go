@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-xray-sdk-go/instrumentation/awsv2"
+	"github.com/aws/aws-xray-sdk-go/xray"
 	"github.com/macai-project/framework-golang/pkg/container"
+	"net/http"
 )
 
 var businessLogicHandlerApiGateway func(ctx context.Context, c *container.Container, e events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
@@ -34,13 +36,23 @@ func HandleRequestApiGateway(ctx context.Context, e events.APIGatewayProxyReques
 	err = c.NewAWSConfig(ctx)
 	if err != nil {
 		return events.APIGatewayProxyResponse{
-			StatusCode: 500,
+			StatusCode: http.StatusInternalServerError,
 			Body:       "AWS Config not initialized",
 		}, err
 	}
 
 	// Xray
 	awsv2.AWSV2Instrumentor(&c.AwsConfig.APIOptions)
+
+	ctx, err = xray.ContextWithConfig(ctx, xray.Config{})
+	if err != nil {
+		c.Logger.Error(err)
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusInternalServerError,
+			Body:       "error configuring xray",
+		}, err
+	}
+	c.Logger.Debug("X-Ray context initialized")
 
 	result, err := businessLogicHandlerApiGateway(ctx, c, e)
 

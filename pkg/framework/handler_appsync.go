@@ -3,8 +3,8 @@ package framework
 import (
 	"context"
 	"fmt"
-
 	"github.com/aws/aws-xray-sdk-go/instrumentation/awsv2"
+	"github.com/aws/aws-xray-sdk-go/xray"
 	"github.com/macai-project/framework-golang/pkg/container"
 )
 
@@ -20,7 +20,7 @@ func HandleRequestAppsync(ctx context.Context, e map[string]interface{}) (interf
 
 	// Check if the container has been initialized
 	if c == nil {
-    return "Container not initialized", fmt.Errorf("container struct must be initialized and passed to the framework")
+		return "Container not initialized", fmt.Errorf("container struct must be initialized and passed to the framework")
 	}
 
 	// Logger
@@ -36,7 +36,14 @@ func HandleRequestAppsync(ctx context.Context, e map[string]interface{}) (interf
 	// Xray
 	awsv2.AWSV2Instrumentor(&c.AwsConfig.APIOptions)
 
+	ctx, err = xray.ContextWithConfig(ctx, xray.Config{})
+	if err != nil {
+		c.Logger.Error(err)
+		return "error configuring xray", err
+	}
+	c.Logger.Debug("X-Ray context initialized")
+
 	result, err := businessLogicHandlerAppsync(ctx, c, e)
-  
+
 	return result, err
 }

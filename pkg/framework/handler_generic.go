@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-xray-sdk-go/instrumentation/awsv2"
+	"github.com/aws/aws-xray-sdk-go/xray"
 	"github.com/macai-project/framework-golang/pkg/container"
 )
 
@@ -33,6 +34,13 @@ func HandleGenericRequest(ctx context.Context, e interface{}) (string, error) {
 
 	// Xray
 	awsv2.AWSV2Instrumentor(&c.AwsConfig.APIOptions)
+
+	ctx, err = xray.ContextWithConfig(ctx, xray.Config{})
+	if err != nil {
+		c.Logger.Error(err)
+		return "error configuring xray", err
+	}
+	c.Logger.Debug("X-Ray context initialized")
 
 	result, err := businessGenericLogicHandler(ctx, c, e)
 

@@ -26,7 +26,7 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/guregu/dynamo v1.15.1
 	github.com/sony/appsync-client-go v1.2.1
-	github.com/stretchr/testify v1.7.2
+	github.com/stretchr/testify v1.8.0
 	go.uber.org/zap v1.21.0
 )
 
