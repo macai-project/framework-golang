@@ -24,6 +24,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/xray v1.13.9
 	github.com/aws/aws-xray-sdk-go v1.7.0
 	github.com/go-sql-driver/mysql v1.6.0
+	github.com/gofrs/uuid v4.2.0+incompatible
 	github.com/guregu/dynamo v1.15.1
 	github.com/sony/appsync-client-go v1.2.1
 	github.com/stretchr/testify v1.8.0
@@ -51,7 +52,6 @@ require (
 	github.com/cenkalti/backoff/v4 v4.1.3 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/eclipse/paho.mqtt.golang v1.4.1 // indirect
-	github.com/gofrs/uuid v4.2.0+incompatible // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
