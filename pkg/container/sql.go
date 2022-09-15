@@ -76,10 +76,10 @@ func (c *Container) NewGormDBClient() error {
 	c.GormDB, err = gorm.Open(mysql.New(mysql.Config{Conn: conn}), &gorm.Config{})
 	if err != nil {
 		conn.Close()
-		return fmt.Errorf("error opening Gorm connection: %w", err)
+		return fmt.Errorf("error opening Gorm session: %w", err)
 	}
 
-	c.Logger.Info("Gorm SQL Connected!")
+	c.Logger.Info("Gorm db session initialized!")
 
 	return err
 }
