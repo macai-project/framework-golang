@@ -51,7 +51,7 @@ func (c *Container) NewGormDBClient() error {
 
 	// If the connection already exists return nil and do nothing
 	if c.GormDB != nil {
-		c.Logger.With("Stats", c.DB.Stats()).Debug("Reusing GormDB Connection")
+		c.Logger.Debug("Reusing GormDB Connection")
 		return nil
 	}
 
@@ -62,26 +62,24 @@ func (c *Container) NewGormDBClient() error {
 	}
 	c.Logger.Debug("SQL Connection Opened")
 
-	c.DB.SetMaxOpenConns(2)
-	c.DB.SetMaxIdleConns(2)
-	c.DB.SetConnMaxLifetime(30 * time.Minute)
+	conn.SetMaxOpenConns(2)
+	conn.SetMaxIdleConns(2)
+	conn.SetConnMaxLifetime(30 * time.Minute)
 
 	// Check connection
 	err = conn.Ping()
 	if err != nil {
-		c.DB.Close()
+		conn.Close()
 		return fmt.Errorf("error in SQL Ping: %w", err)
 	}
 
 	c.GormDB, err = gorm.Open(mysql.New(mysql.Config{Conn: conn}), &gorm.Config{})
 	if err != nil {
-		c.DB.Close()
+		conn.Close()
 		return fmt.Errorf("error opening Gorm connection: %w", err)
 	}
 
-	c.Logger.With(
-		"Stats", c.DB.Stats(),
-	).Info("Gorm SQL Connected!")
+	c.Logger.Info("Gorm SQL Connected!")
 
 	return err
 }
