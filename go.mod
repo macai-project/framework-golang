@@ -29,6 +29,8 @@ require (
 	github.com/sony/appsync-client-go v1.2.1
 	github.com/stretchr/testify v1.8.0
 	go.uber.org/zap v1.21.0
+	gorm.io/driver/mysql v1.3.6
+	gorm.io/gorm v1.23.8
 )
 
 require (
@@ -55,6 +57,8 @@ require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/klauspost/compress v1.15.8 // indirect
 	github.com/pkg/errors v0.9.1 // indirect

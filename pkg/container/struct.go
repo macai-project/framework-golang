@@ -23,6 +23,7 @@ import (
 	"github.com/guregu/dynamo"
 	appsync "github.com/sony/appsync-client-go"
 	"go.uber.org/zap"
+	"gorm.io/gorm"
 )
 
 // Container is the container used to inject dependencies into the flow
@@ -38,6 +39,7 @@ type Container struct {
 	FirehoseClient       *firehose.Client
 	DynamoDBClient       *dynamodb.Client
 	DynamoDBORM          *dynamo.DB
+	GormDB               *gorm.DB
 	Session              *session.Session
 	S3Client             *s3.Client
 	LambdaClient         *lambda.Client
