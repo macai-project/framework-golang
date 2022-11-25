@@ -47,9 +47,9 @@ func (c *Container) SendBatchEvents(ctx context.Context, events []interface{}, d
 
 		entries = append(entries, entry)
 
-		if i-counterSize+1 >= batchSize {
+		if i-counterSize+1 == batchSize {
 			// Limit of batch size reached, send event
-			counterSize = counterSize + i
+			counterSize = counterSize + batchSize
 			_, err = c.EventBridgeClient.PutEvents(ctx, &eventbridge.PutEventsInput{Entries: entries})
 			if err != nil {
 				return fmt.Errorf("error in Eventbridge SendBatchEvents: %s", err.Error())
