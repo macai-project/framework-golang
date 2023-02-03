@@ -3,6 +3,7 @@ package container
 import (
 	"database/sql"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfront"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
@@ -32,6 +33,7 @@ type Container struct {
 	AwsConfigV1          awsV1.Config
 	AppSyncClient        *appsync.Client
 	DB                   *sql.DB
+	CloudfrontClient     *cloudfront.Client
 	CloudwatchClient     *cloudwatch.Client
 	CloudsearchClient    *cloudsearchdomain.Client
 	CognitoClient        *cognitoidentityprovider.Client
